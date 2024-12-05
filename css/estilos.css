@@ -1,0 +1,95 @@
+* {
+    background-color: aquamarine;
+}
+
+/* Global container styles */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    height: 100vh;
+}
+
+/* Message container styles */
+.mensaje {
+    text-align: center;
+    background-color: rgb(203, 145, 230);
+    height: 100%;
+    border-radius: 5px;
+    width: 100%; /* Asegura que se ajuste al contenedor */
+}
+
+/* Button styles */
+.custom-btn {
+    display: inline-block;
+    padding: 15px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #28a745; /* Verde estilo Bootstrap */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Asegura que el botón ocupe el ancho completo */
+    text-align: center;
+}
+
+.custom-btn:hover {
+    background-color: #218838; /* Verde más oscuro al pasar el ratón */
+}
+
+.mensaje2 {
+    text-align: center;
+    background-color: antiquewhite;
+    color: gray;
+    margin-bottom: 10px;
+}
+
+/* Input and button container styles */
+div > input {
+    display: block;
+    margin: 10px auto; /* Centra horizontalmente */
+    padding: 10px;
+    border-radius: 5px;
+    width: 80%; /* Ajusta el ancho */
+    border: 1px solid #ccc; /* Agrega borde sutil */
+}
+
+/* Button styles for secondary button */
+.custom-btn2 {
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff; /* Azul estilo Bootstrap */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 auto; /* Centra el botón horizontalmente */
+    text-align: center;
+}
+
+.custom-btn2:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+}
+
+/* Table styles */
+.table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    max-width: 600px;
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    border: 2px solid black;
+    text-align: center; /* Centra el contenido dentro de las celdas */
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina numero</title>
+    <link rel="stylesheet" href="./css/estilos.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div>
+                <h1 class="mensaje">Juego de adivina numero</h1>
+            </div>
+
+            <div class="col text-center my-3">
+                <button class="custom-btn" id="adivina" onclick="adivinaAleatorio()">Generar número entre 0-100</button>
+            </div>
+
+            <div>
+                <h4 class="mensaje2">Ingresa numero</h4>
+                <input id="numero" class="input" disabled>
+                <button id="enviar" class="custom-btn2" onclick="compararvalor()" disabled>Enviar</button>
+            </div>
+
+        </div>
+
+        <!-- Tabla para mostrar intentos, intentos restantes, número ingresado -->
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="35%" class="intentos">Intentos realizados</th>
+                        <th width="35%" class="intentosr">Intentos restantes</th>
+                        <th class="num">Número ingresado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td id="cuenta-intentos">-</td>
+                    <td id="cuenta-restantes">-</td>
+                    <td id="valor-numero">-</td>
+                </tbody>
+            </table>
+        </div>
+        <div id="mensaje" class="mensaje-div"></div>
+        <div class="row">
+            <button id="reiniciar" class="custom-btn" onclick="reiniciarJuego()" style="display:none;">Reiniciar Juego</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Variables globales
+        let numeroAleatorio;
+        let intentos = 0;
+        const maxIntentos = 10;
+
+        // Función para generar un número aleatorio
+        function adivinaAleatorio() {
+            numeroAleatorio = Math.floor(Math.random() * 101);
+
+            // Deshabilitar el botón "Generar número"
+            document.getElementById("adivina").disabled = true;
+
+            // Habilitar el botón "Enviar"
+            document.getElementById("enviar").disabled = false;
+
+            // Reiniciar intentos en la interfaz
+            intentos = 0;
+            document.getElementById("cuenta-intentos").innerText = "-";
+            document.getElementById("cuenta-restantes").innerText = maxIntentos;
+            document.getElementById("valor-numero").innerText = "-";
+            document.getElementById("numero").disabled= false;
+
+            // Limpiar el div de mensajes
+            document.getElementById("mensaje").innerHTML = "";
+            document.getElementById("reiniciar").style.display = "";  // Ocultar el botón de reiniciar
+        }
+
+        // Función para comparar el número ingresado
+        function compararvalor() {
+            const numeroIngresado = parseInt(document.getElementById("numero").value);
+
+            if (isNaN(numeroIngresado)) {
+                mostrarMensaje("Por favor, ingresa un número válido.");
+                return;
+            }
+
+            intentos++;
+            document.getElementById("cuenta-intentos").innerText = intentos;
+            document.getElementById("cuenta-restantes").innerText = maxIntentos - intentos;
+            document.getElementById("valor-numero").innerText = numeroIngresado;
+
+            // Verificar el número ingresado
+            if (numeroIngresado === numeroAleatorio) {
+                mostrarMensaje("¡Felicidades! Adivinaste el número.");
+                document.getElementById("enviar").disabled = true;
+                document.getElementById("reiniciar").style.display = "block";  // Mostrar el botón de reiniciar
+                return;
+            } else if (numeroIngresado < numeroAleatorio) {
+                mostrarMensaje("El número es mayor.");
+            } else {
+                mostrarMensaje("El número es menor.");
+            }
+
+            // Deshabilitar el botón si se alcanzaron los intentos máximos
+            if (intentos >= maxIntentos) {
+                mostrarMensaje(`¡Se acabaron los intentos! El número era ${numeroAleatorio}.`);
+                document.getElementById("enviar").disabled = true;
+                document.getElementById("reiniciar").style.display = "block";  // Mostrar el botón de reiniciar
+                document.getElementById("numero").disabled= true;
+            }
+        }
+
+        // Función para mostrar mensajes en el div
+        function mostrarMensaje(mensaje) {
+            document.getElementById("mensaje").innerHTML = `<p>${mensaje}</p>`;
+        }
+
+        // Función para reiniciar el juego
+        function reiniciarJuego() {
+            // Volver a habilitar el botón de generar número
+            document.getElementById("adivina").disabled = false;
+
+            // Ocultar el botón de reiniciar
+            document.getElementById("reiniciar").style.display = "none";
+
+            // Limpiar los valores de la interfaz
+            document.getElementById("cuenta-intentos").innerText = "-";
+            document.getElementById("cuenta-restantes").innerText = "-";
+            document.getElementById("valor-numero").innerText = "-";
+            document.getElementById("mensaje").innerHTML = "";
+            document.getElementById("numero").disabled= true;
+            document.getElementById("numero").value = "";
+        }
+    </script>
+</body>
+
+</html>
